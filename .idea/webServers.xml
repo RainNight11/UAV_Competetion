@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3d5865ff-f8be-4343-82ca-b5df32681110" name="UAV">
+        <fileTransfer rootFolder="/root/autodl-tmp" accessType="SFTP" host="connect.westc.gpuhub.com" port="33636" sshConfigId="d5eed23b-0808-451b-a929-4cc3667bf044" sshConfig="root@connect.westc.gpuhub.com:33636 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

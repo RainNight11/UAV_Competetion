@@ -1,0 +1,60 @@
+# command line: /mnt/d/CV/HDBN/Model_inference/Mix_GCN/main.py
+
+base_lr: 0.1
+batch_size: 2
+config: ./config/ctrgcn_V2_J.yaml
+device:
+- 0
+eval_interval: 5
+feeder: dataset.feeder_uav.Feeder
+ignore_weights: []
+log_interval: 100
+lr_decay_rate: 0.1
+model: model.ctrgcn_xy.Model
+model_args:
+  graph: graph.Simcc.Graph
+  graph_args:
+    labeling_mode: spatial
+  num_class: 155
+  num_person: 2
+  num_point: 17
+model_saved_name: ''
+nesterov: true
+num_epoch: 65
+num_worker: 8
+optimizer: SGD
+phase: train
+print_log: true
+save_epoch: 30
+save_interval: 1
+save_score: false
+seed: 1
+show_topk:
+- 1
+- 5
+start_epoch: 0
+step:
+- 35
+- 55
+test_batch_size: 64
+test_feeder_args:
+  bone: false
+  data_path: ../../pose_data/V2.npz
+  data_split: test
+  p_interval:
+  - 0.95
+  vel: false
+  window_size: 64
+train_feeder_args:
+  bone: false
+  data_path: ../../pose_data/V2.npz
+  data_split: train
+  p_interval:
+  - 0.5
+  - 1
+  vel: false
+  window_size: 64
+warm_up_epoch: 5
+weight_decay: 0.0004
+weights: null
+work_dir: ./output/ctrgcn_V2_J

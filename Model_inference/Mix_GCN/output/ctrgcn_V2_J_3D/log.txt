@@ -1,0 +1,27 @@
+[ Sat Oct 19 19:26:14 2024 ] using warm up, epoch: 5
+[ Sat Oct 19 19:27:20 2024 ] using warm up, epoch: 5
+[ Sat Oct 19 19:30:22 2024 ] using warm up, epoch: 5
+[ Sat Oct 19 19:30:36 2024 ] Parameters:
+{'work_dir': './output/ctrgcn_V2_J_3D', 'model_saved_name': './output/ctrgcn_V2_J_3D/runs', 'config': './config/ctrgcn_V2_J_3d.yaml', 'phase': 'train', 'save_score': False, 'seed': 1, 'log_interval': 100, 'save_interval': 1, 'save_epoch': 30, 'eval_interval': 5, 'print_log': True, 'show_topk': [1, 5], 'feeder': 'dataset.feeder_xyz.Feeder', 'num_worker': 8, 'train_feeder_args': {'data_path': '../../pose_data/V2.npz', 'data_split': 'train', 'p_interval': [0.5, 1], 'window_size': 64, 'bone': False, 'vel': False}, 'test_feeder_args': {'data_path': '../../pose_data/V2.npz', 'data_split': 'test', 'p_interval': [0.95], 'window_size': 64, 'bone': False, 'vel': False}, 'model': 'model.ctrgcn_xyz.Model', 'model_args': {'num_class': 155, 'num_point': 17, 'num_person': 2, 'graph': 'graph.uav.Graph', 'graph_args': {'labeling_mode': 'spatial'}}, 'weights': None, 'ignore_weights': [], 'base_lr': 0.1, 'step': [35, 55], 'device': 0, 'optimizer': 'SGD', 'nesterov': True, 'batch_size': 16, 'test_batch_size': 64, 'start_epoch': 0, 'num_epoch': 65, 'weight_decay': 0.0004, 'lr_decay_rate': 0.1, 'warm_up_epoch': 5}
+
+[ Sat Oct 19 19:30:36 2024 ] # Parameters: 1460911
+[ Sat Oct 19 19:30:36 2024 ] Training epoch: 1
+[ Sat Oct 19 19:31:24 2024 ] using warm up, epoch: 5
+[ Sat Oct 19 19:31:39 2024 ] Parameters:
+{'work_dir': './output/ctrgcn_V2_J_3D', 'model_saved_name': './output/ctrgcn_V2_J_3D/runs', 'config': './config/ctrgcn_V2_J_3d.yaml', 'phase': 'train', 'save_score': False, 'seed': 1, 'log_interval': 100, 'save_interval': 1, 'save_epoch': 30, 'eval_interval': 5, 'print_log': True, 'show_topk': [1, 5], 'feeder': 'dataset.feeder_xyz.Feeder', 'num_worker': 8, 'train_feeder_args': {'data_path': '../../pose_data/V2.npz', 'data_split': 'train', 'p_interval': [0.5, 1], 'window_size': 64, 'bone': False, 'vel': False}, 'test_feeder_args': {'data_path': '../../pose_data/V2.npz', 'data_split': 'test', 'p_interval': [0.95], 'window_size': 64, 'bone': False, 'vel': False}, 'model': 'model.ctrgcn_xyz.Model', 'model_args': {'num_class': 155, 'num_point': 17, 'num_person': 2, 'graph': 'graph.uav.Graph', 'graph_args': {'labeling_mode': 'spatial'}}, 'weights': None, 'ignore_weights': [], 'base_lr': 0.1, 'step': [35, 55], 'device': 0, 'optimizer': 'SGD', 'nesterov': True, 'batch_size': 16, 'test_batch_size': 64, 'start_epoch': 0, 'num_epoch': 65, 'weight_decay': 0.0004, 'lr_decay_rate': 0.1, 'warm_up_epoch': 5}
+
+[ Sat Oct 19 19:31:39 2024 ] # Parameters: 1460911
+[ Sat Oct 19 19:31:39 2024 ] Training epoch: 1
+[ Sat Oct 19 19:32:18 2024 ] using warm up, epoch: 5
+[ Sat Oct 19 19:32:34 2024 ] Parameters:
+{'work_dir': './output/ctrgcn_V2_J_3D', 'model_saved_name': './output/ctrgcn_V2_J_3D/runs', 'config': './config/ctrgcn_V2_J_3d.yaml', 'phase': 'train', 'save_score': False, 'seed': 1, 'log_interval': 100, 'save_interval': 1, 'save_epoch': 30, 'eval_interval': 5, 'print_log': True, 'show_topk': [1, 5], 'feeder': 'dataset.feeder_xyz.Feeder', 'num_worker': 8, 'train_feeder_args': {'data_path': '../../pose_data/V2.npz', 'data_split': 'train', 'p_interval': [0.5, 1], 'window_size': 64, 'bone': False, 'vel': False}, 'test_feeder_args': {'data_path': '../../pose_data/V2.npz', 'data_split': 'test', 'p_interval': [0.95], 'window_size': 64, 'bone': False, 'vel': False}, 'model': 'model.ctrgcn_xyz.Model', 'model_args': {'num_class': 155, 'num_point': 17, 'num_person': 2, 'graph': 'graph.uav.Graph', 'graph_args': {'labeling_mode': 'spatial'}}, 'weights': None, 'ignore_weights': [], 'base_lr': 0.1, 'step': [35, 55], 'device': 0, 'optimizer': 'SGD', 'nesterov': True, 'batch_size': 8, 'test_batch_size': 64, 'start_epoch': 0, 'num_epoch': 65, 'weight_decay': 0.0004, 'lr_decay_rate': 0.1, 'warm_up_epoch': 5}
+
+[ Sat Oct 19 19:32:34 2024 ] # Parameters: 1460911
+[ Sat Oct 19 19:32:34 2024 ] Training epoch: 1
+[ Sat Oct 19 19:33:19 2024 ] using warm up, epoch: 5
+[ Sat Oct 19 19:33:34 2024 ] Parameters:
+{'work_dir': './output/ctrgcn_V2_J_3D', 'model_saved_name': './output/ctrgcn_V2_J_3D/runs', 'config': './config/ctrgcn_V2_J_3d.yaml', 'phase': 'train', 'save_score': False, 'seed': 1, 'log_interval': 100, 'save_interval': 1, 'save_epoch': 30, 'eval_interval': 5, 'print_log': True, 'show_topk': [1, 5], 'feeder': 'dataset.feeder_xyz.Feeder', 'num_worker': 8, 'train_feeder_args': {'data_path': '../../pose_data/V2.npz', 'data_split': 'train', 'p_interval': [0.5, 1], 'window_size': 64, 'bone': False, 'vel': False}, 'test_feeder_args': {'data_path': '../../pose_data/V2.npz', 'data_split': 'test', 'p_interval': [0.95], 'window_size': 64, 'bone': False, 'vel': False}, 'model': 'model.ctrgcn_xyz.Model', 'model_args': {'num_class': 155, 'num_point': 17, 'num_person': 2, 'graph': 'graph.uav.Graph', 'graph_args': {'labeling_mode': 'spatial'}}, 'weights': None, 'ignore_weights': [], 'base_lr': 0.1, 'step': [35, 55], 'device': 0, 'optimizer': 'SGD', 'nesterov': True, 'batch_size': 16, 'test_batch_size': 64, 'start_epoch': 0, 'num_epoch': 65, 'weight_decay': 0.0004, 'lr_decay_rate': 0.1, 'warm_up_epoch': 5}
+
+[ Sat Oct 19 19:33:34 2024 ] # Parameters: 1460911
+[ Sat Oct 19 19:33:34 2024 ] Training epoch: 1
+[ Sat Oct 19 19:45:56 2024 ] using warm up, epoch: 5
