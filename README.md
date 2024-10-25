@@ -1,4 +1,4 @@
-# 说明：
+  # 说明：
 
 ## 环境要求：
 
@@ -24,7 +24,7 @@
 
 ## 关于不同的GCN不同模态的pred.npy文件
 
-将其放置在pred_npy_file下面，共14个，可以直接使用复合，也可以运行config的测试文件进行生成。
+将其放置在pred_npy_file下面，共14个，可以直接使用复核，也可以运行config的测试文件进行生成。
 
 ## 权重
 [https://drive.google.com/drive/folders/1TMTTBBcxCugXOq7Hfld2nrRs-RcIdbYn?usp=drive_link](https://drive.google.com/drive/folders/1TMTTBBcxCugXOq7Hfld2nrRs-RcIdbYn?usp=drive_link)
