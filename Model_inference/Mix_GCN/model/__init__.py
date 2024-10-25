@@ -1,1 +1,0 @@
-from . import ctrgcn_xyz
