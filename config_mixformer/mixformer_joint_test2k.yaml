@@ -1,0 +1,28 @@
+pred_name: pred_mixformer_joint2k
+
+# feeder
+dataset: datasets.dataset.UavDataset
+test_data_args:
+  data_path: ./data_test/test_B_joint.npy
+  debug: False
+  window_size: 64
+  p_interval: [ 0.95 ]
+  is_test: True
+  d: 2
+
+# model
+model: model.ske_mixfk2.Model
+model_args:
+  num_class: 155
+  num_point: 17
+  num_person: 2
+  graph: graph.uav.Graph
+  graph_args:
+    labeling_mode: 'spatial'
+
+# test
+phase: test
+device: 0
+test_batch_size: 64
+weights: ./mixformer_joint2k/runs-55-28728.pt
+# save_score: True
