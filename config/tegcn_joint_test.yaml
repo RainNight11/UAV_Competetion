@@ -19,6 +19,6 @@ model_args:
 phase: test
 device: 0
 test_batch_size: 128
-weights: ./runs/runs/uav-63-32832.pt
+weights: ./tegcn_joint/runs/uav-63-32832.pt
 
 # save_score: True
