@@ -6,7 +6,9 @@
 
 ## 训练日志
 
-见ctr_joint、ctr_bone、mst_joint2d等文件夹的work_dir
+位于train_prediction_log文件夹下，其中包含一个prediction日志，用来保存预测时使用的高斯过程最小化方法对应的权重及其最优权重（用A测试集测试时发现每次会所差异，故保存下来）。
+
+其余的均为不同GCN网络对应的不同模态的训练日志，但是并不是每一个GCN都用了所有模态。
 
 ## 数据位置
 
@@ -14,9 +16,14 @@
 
 ## 运行方法
 
-运行main函数即可，修改config参数，分别对应config文件夹内的不同train、test的yaml文件，最后得到不同的pred文件进行ensemble.py合并
+运行main函数即可，修改config参数，分别对应config与config_mixformer文件夹内的不同train、test的yaml文件，最后得到不同的pred文件（文件列于下面，可使用网盘给定的权重进行检查），最后进行Mix_B.py合并。
+
+对于这里的Mix_A.py使用A测试集生成的置信度个标签找到最优权重之后，将最优权重在train_prediction_log文件夹下的prediction中取出，然后输入Mix_B.py进行直接融合由B测试集得到的npy文件。所以这里的rate并不是手动调节，数值小数点位数较多。
+
+对于项目中ctrgcn_joint、tegcn_joint这类的文件夹是为了在训练时将权重与日志保存于此。
+
+## 关于不同的GCN不同模态的pred.npy文件
+
+将其放置在pred_npy_file下面，共14个，可以直接使用复合，也可以运行config的测试文件进行生成。
 
 ## 权重
-
-见ctr_joint、ctr_bone、mst_joint2d等文件夹，为了减小文件大小删去了部分，仅保留最后使用预测的部分_*_joint.npy
-```
