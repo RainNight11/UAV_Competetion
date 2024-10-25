@@ -1,8 +1,12 @@
+pred_name: pred_te_bone
 # feeder
 dataset: datasets.dataset.UavDataset
 test_data_args:
-  data_path: ./data_test/test_B_joint.npy
+  data_path: ./data_test/test_B_bone.npy
   debug: False
+  window_size: 120
+  random_rot: False
+  p_interval: [ 0.95 ]
   is_test: True
 
 # model
@@ -19,6 +23,6 @@ model_args:
 phase: test
 device: 0
 test_batch_size: 128
-weights: ./runs/uav-49-51350.pt
+weights: ./tegcn_bone/runs-61-63674.pt
 
 # save_score: True

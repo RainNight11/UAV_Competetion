@@ -1,11 +1,11 @@
-work_dir: ./ctrgcn2d/work_dir
-model_saved_name: ./ctrgcn2d/runs
+work_dir: ./ctrgcnbone2d/work_dir
+model_saved_name: ./ctrgcnbone2d/runs
 
 # feeder
 dataset: datasets.dataset.UavDataset
 train_data_args:
   data_path:
-   ./data/train_joint.npy
+   ./data/train_bone.npy
   label_path: ./data/train_label.npy
   random_choose: False
   random_shift: False
@@ -20,7 +20,7 @@ train_data_args:
 
 val_data_args:
   data_path:
-   ./data/test_A_joint.npy
+   ./data/test_A_bone.npy
   label_path: ./data/test_A_label.npy
   random_choose: False
   debug: False

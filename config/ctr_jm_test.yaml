@@ -1,12 +1,17 @@
+pred_name: pred_ctr_jm
+
 # feeder
 dataset: datasets.dataset.UavDataset
 test_data_args:
-  data_path: ./data_test/test_B_joint.npy
+  data_path: ./data_test/test_B_joint_motion.npy
+  random_choose: False
   debug: False
+  window_size: 64
+  p_interval: [ 0.95 ]
   is_test: True
 
 # model
-model: model.fr_tegcn.Model
+model: model.ctrgcn.Model
 model_args:
   num_class: 155
   num_point: 17
@@ -18,7 +23,7 @@ model_args:
 # test
 phase: test
 device: 0
-test_batch_size: 128
-weights: ./runs/uav-49-51350.pt
+test_batch_size: 64
+weights: ./ctrgcn_jm/runs-62-64701.pt
 
 # save_score: True

@@ -3,7 +3,7 @@ pred_name: pred_ctr_joint
 # feeder
 dataset: datasets.dataset.UavDataset
 test_data_args:
-  data_path: ./data_test/test_joint_B.npy
+  data_path: ./data_test/test_B_joint.npy
   debug: False
   window_size: 64
   p_interval: [ 0.95 ]

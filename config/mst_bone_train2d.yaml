@@ -1,13 +1,13 @@
-work_dir: ./mstgcn2d/work_dir
-model_saved_name: ./mstgcn2d/runs
+work_dir: ./mstgcn_bone2d/work_dir
+model_saved_name: ./mstgcn_bone2d/runs
 
 # feeder
 dataset: datasets.dataset.UavDataset
 train_data_args:
   data_path:
-   ./data/train_joint.npy
+   ./data/train_bone.npy
   label_path: ./data/train_label.npy
-  random_choose: True
+  random_choose: False
   random_shift: False
   random_move: False
   window_size: 64

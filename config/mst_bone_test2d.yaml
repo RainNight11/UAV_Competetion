@@ -1,10 +1,10 @@
-pred_name: pred_ctr_joint2d
+pred_name: pred_mst_bone2d
 
 # feeder
 dataset: datasets.dataset.UavDataset
 test_data_args:
   data_path: ./data_test/test_B_joint.npy
-  random_choose: False
+  random_choose: True
   debug: False
   window_size: 64
   p_interval: [ 0.95 ]
@@ -12,7 +12,7 @@ test_data_args:
   d: 2
 
 # model
-model: model.ctrgcn_xy.Model
+model: model.mstgcn_xy.Model
 model_args:
   num_class: 155
   num_point: 17
@@ -25,6 +25,6 @@ model_args:
 phase: test
 device: 0
 test_batch_size: 64
-weights: ./ctrgcn_joint2d/runs-64-16640.pt
+weights: ./mstgcn2d/runs-64-16640.pt
 
 # save_score: True
