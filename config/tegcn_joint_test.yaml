@@ -19,6 +19,6 @@ model_args:
 phase: test
 device: 0
 test_batch_size: 128
-weights: ./runs/uav-49-51350.pt
+weights: ./runs/runs/uav-63-32832.pt
 
 # save_score: True
