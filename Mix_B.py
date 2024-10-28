@@ -81,15 +81,18 @@ if __name__ == "__main__":
 
     File = [
         ctrgcn_joint_file, ctrgcn_bone_file,ctrgcn_jm_file,
-        tdgcn_joint_file, tdgcn_bone_file, tdgcn_jm_file ,tdgcn_jb_file,
+        tdgcn_joint_file, tdgcn_bone_file, tdgcn_jm_file ,
         te_joint_file, te_bone_file,
         ctrgcn_joint2d_file, ctrgcn_bone2d_file,
-        mst_joint2d_file,
+
         mixformer_joint_file,mixformer_joint2k_file
     ]
     Numclass = 155
     Sample_Num = 4599
-    Rate =[2.0, 0.01, 0.01, 0.6649733069029137, 1.2870444454077117, 0.2640191593249801, 0.7590339165478278, 1.704016750432049, 0.01, 0.01, 0.4998878494436817, 1.1743153818574115, 0.5074930293232167, 0.01]
+    Rate = [2.07, 0.01, 0.5877840709272881,
+            0.9096500782040964, 0.4920203478822007, 0.9864170104440244,
+            0.01, 0.01, 0.7042257515428801,
+            0.8650336414607624, 0.01, 0.40304553848426633, 0.01]
 
     final_score = Cal_Score(File, Rate, Sample_Num, Numclass)
 
