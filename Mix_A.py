@@ -90,10 +90,10 @@ if __name__ == "__main__":
 
     File = [
         ctrgcn_joint_file, ctrgcn_bone_file,ctrgcn_jm_file,
-        tdgcn_joint_file, tdgcn_bone_file, tdgcn_jm_file ,tdgcn_jb_file,
+        tdgcn_joint_file, tdgcn_bone_file, tdgcn_jm_file ,
         te_joint_file, te_bone_file,
         ctrgcn_joint2d_file, ctrgcn_bone2d_file,
-        mst_joint2d_file,
+
         mixformer_joint_file,mixformer_joint2k_file
     ]
     Numclass = 155
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     # 生成真实标签
     true_label = gen_label(val_npy_path)
     # 优化权重的范围
-    space = [(0.01, 2.0) for _ in range(14)]  # 为每个流设置一个权重范围 [0.01, 2.0]
+    space = [(0.01, 2.0) for _ in range(12)]  # 为每个流设置一个权重范围 [0.01, 2.0]
     # 使用高斯过程最小化来优化权重
 
     # 使用 tqdm 显示进度条
