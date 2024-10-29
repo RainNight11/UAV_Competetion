@@ -18,7 +18,7 @@
 
 运行main函数即可，修改config参数，分别对应config与config_mixformer文件夹内的不同train、test的yaml文件，最后得到不同的pred文件（文件列于下面，可使用网盘给定的权重进行检查），最后进行Mix_B.py合并。
 
-对于这里的Mix_A.py使用A测试集生成的置信度个标签找到最优权重之后，将最优权重在train_prediction_log文件夹下的prediction中取出，然后输入Mix_B.py进行直接融合由B测试集得到的npy文件。所以这里的rate并不是手动调节，数值小数点位数较多。（之后手动删除了其中的tdgcn_jb和mstgcn模态，因为准确率相对较低，得出结果更优，且在高斯分布最小化之后采取手动微调的方式，准确率略微提高。）
+对于这里的Mix_A.py使用A测试集生成的置信度个标签找到最优权重之后，将最优权重在train_prediction_log文件夹下的prediction中取出，然后输入Mix_B.py进行直接融合由B测试集得到的npy文件。所以这里的rate并不是手动调节，数值小数点位数较多。（之后**手动删除了其中的tdgcn_jb和mstgcn模态**，因为准确率相对较低，得出结果更优，且在高斯分布最小化之后采取**手动微调**的方式，准确率略微提高，因此在预测的记录日志有修改。）
 
 对于项目中ctrgcn_joint、tegcn_joint这类的文件夹是为了在训练时将权重与日志保存于此。
 
