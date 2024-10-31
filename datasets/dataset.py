@@ -9,7 +9,6 @@ from datasets.tools import random_rot
 
 sys.path.extend(['../'])
 from . import tools
-from . import preprocess
 
 class UavDataset(Dataset): # 构建数据集
     def __init__(self, data_path, label_path=None,
@@ -108,11 +107,21 @@ class UavDataset(Dataset): # 构建数据集
         data_numpy = self.data[index]
         data_numpy = np.array(data_numpy)
 
-        data_numpy = self.fill_empty_frames(data_numpy)
-
+        # data_numpy = self.fill_empty_frames(data_numpy)
         # valid_frame_num = np.sum(data_numpy.sum(0).sum(-1).sum(-1) != 0)
+        # if(valid_frame_num == 0):
+        #     if self.is_test:
+        #         if self.d == 2:
+        #             return np.zeros((2, self.window_size, 17, 2)), index
+        #         return np.zeros((3, self.window_size, 17, 2)), index
+        #     else:
+        #         label = self.label[index]
+        #         if self.d == 2:
+        #             return np.zeros((2, self.window_size, 17, 2)), label, index
+        #         return np.zeros((3, self.window_size, 17, 2)), label, index
         # # reshape Tx(MVC) to CTVM
         # data_numpy = tools.valid_crop_resize(data_numpy, valid_frame_num, self.p_interval, self.window_size)
+
         if self.d == 2:
             data_numpy = data_numpy[[0,2],:,:,:]
         else:
