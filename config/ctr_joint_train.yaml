@@ -1,50 +1,66 @@
-work_dir: ./ctrgcn/work_dir
-model_saved_name: ./ctrgcn/runs
-
-# feeder
+base_lr: 0.1
+batch_size: 64
+config: ./config/ctr.yaml
 dataset: datasets.dataset.UavDataset
-train_data_args:
-  data_path:
-   ./data/train_joint.npy
-  label_path: ./data/train_label.npy
-  random_choose: True
-  random_shift: False
-  random_move: False
-  window_size: 64
-  normalization: False
-  debug: False
-  use_mmap: True
-  random_rot: False
-  p_interval: [0.5, 1]
-
-val_data_args:
-  data_path:
-   ./data/test_A_joint.npy
-  label_path: ./data/test_A_label.npy
-  debug: False
-  window_size: 64
-  p_interval: [ 0.95 ]
-
-# model
+device: 0
+eval_interval: 5
+ignore_weights: []
+label_smoothing: 0.0
+log_interval: 100
+lr_decay_rate: 0.1
 model: model.ctrgcn.Model
 model_args:
-  num_class: 155
-  num_point: 17
-  num_person: 2
   graph: graph.uav.Graph
   graph_args:
-    labeling_mode: 'spatial'
-
-#optim
-weight_decay: 0.0004
-base_lr: 0.1
-lr_decay_rate: 0.1
-step: [35, 55]
-warm_up_epoch: 5
-
-# training
-device: 0
-batch_size: 64
-test_batch_size: 64
+    labeling_mode: spatial
+  num_class: 155
+  num_person: 2
+  num_point: 17
+model_saved_name: ./ctrgcn/runs
+nesterov: true
 num_epoch: 65
-nesterov: True
+num_workers: 32
+only_train_epoch: 0
+only_train_part: false
+optimizer: SGD
+phase: train
+pred_name: ''
+print_log: true
+save_interval: 1
+save_score: true
+seed: 1
+show_topk:
+- 1
+- 5
+start_epoch: 0
+step:
+- 35
+- 55
+test_batch_size: 64
+test_data_args: {}
+train_data_args:
+  data_path: ./data/train_joint.npy
+  debug: false
+  label_path: ./data/train_label.npy
+  normalization: false
+  p_interval:
+  - 0.5
+  - 1
+  random_choose: true
+  random_move: false
+  random_rot: false
+  random_shift: false
+  use_mmap: true
+  window_size: 64
+val_batch_size: 256
+val_data_args:
+  data_path: ./data/test_A_joint.npy
+  debug: false
+  label_path: ./data/test_A_label.npy
+  p_interval:
+  - 0.95
+  window_size: 64
+warm_up_epoch: 5
+weight_decay: 0.0004
+weights: null
+work_dir: ./ctrgcn/work_dir
