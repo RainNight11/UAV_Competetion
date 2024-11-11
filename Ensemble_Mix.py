@@ -92,7 +92,7 @@ def get_parser():
     parser.add_argument('--mixformerk2_jm', type=str, default='./npy_former/pred_mixformerk2_jm.npy')
     parser.add_argument('--mixformerk2_bm', type=str, default='./npy_former/pred_mixformerk2_bm.npy')
 
-    parser.add_argument('--val_sample', type=str, default='./data_test/test_label.npy')
+    parser.add_argument('--val_sample', type=str, default='./data/val_label.npy')
     return parser
 
 
@@ -162,7 +162,7 @@ if __name__ == "__main__":
 
 
     # 优化权重的范围
-    space = [(-1.0, 2.0) for _ in range(32)]  # 为每个流设置一个权重范围 [0.01, 2.0]
+    space = [(0.01, 2.0) for _ in range(32)]  # 为每个流设置一个权重范围 [0.01, 2.0]
     # 使用高斯过程最小化来优化权重
     
     # 使用 tqdm 显示进度条
