@@ -4,7 +4,6 @@ import numpy as np
 from torch.autograd import Variable
 from model.modules import *
 from model.lib import ST_RenovateNet
-import graph
 
 
 def import_class(name):
@@ -40,10 +39,10 @@ class Model(nn.Module):
 
     def __init__(self,
                  # Base Params
-                 num_class=155, num_point=17, num_frame=64, num_person=2, graph='graph.uav.Graph', graph_args=dict(), in_channels=3,
+                 num_class=60, num_point=25, num_frame=64, num_person=2, graph=None, graph_args=dict(), in_channels=3,
                  base_channel=64, drop_out=0, adaptive=True,
                  # Module Params
-                 cl_mode=None, multi_cl_weights=[1, 1, 1, 1], cl_version='V0', pred_threshold=0, use_p_map=True,
+                 cl_mode='ST-Multi-Level', multi_cl_weights=[1, 1, 1, 1], cl_version='V0', pred_threshold=0, use_p_map=True,
                  ):
         super(Model, self).__init__()
 

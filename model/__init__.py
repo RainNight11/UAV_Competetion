@@ -7,4 +7,9 @@ from . import ctrgcn_xyz
 from . import fr_tegcn
 from . import fr_tdgcn
 from . import ctrgcn_xy
+from . import fr_ctrgcn_xy
 from . import mstgcn_xy
+from . import ske_mixf
+from . import ske_mixfk2
+from . import tdgcn_xy
+from . import loss
