@@ -24,6 +24,6 @@ model_args:
 phase: test
 device: 0
 test_batch_size: 128
-weights: /root/UAV/mst/mst_joint2d/runs-60-15921.pt
+weights: /root/UAV/mst/mst_joint2d/runs-61-16182.pt
 
 # save_score: True

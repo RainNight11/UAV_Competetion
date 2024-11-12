@@ -1,5 +1,5 @@
-work_dir: ./mixformer/mixformer_bm/work_dir
-model_saved_name: ./mixformer/mixformer_bm/runs
+work_dir: ./mixformer90/mixformer_bm/work_dir
+model_saved_name: ./mixformer90/mixformer_bm/runs
 
 # feeder
 dataset: datasets.dataset.UavDataset
@@ -42,12 +42,12 @@ model_args:
 weight_decay: 0.0005
 base_lr: 0.2
 #lr_decay_rate: 0.1
-#step: [35, 55]
+step: [35, 55,70]
 warm_up_epoch: 5
 
 # training
 device: 0
 batch_size: 64
 test_batch_size: 128
-num_epoch: 65
+num_epoch: 90
 nesterov: True

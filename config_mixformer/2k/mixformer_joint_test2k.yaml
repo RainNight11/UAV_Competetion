@@ -25,6 +25,6 @@ model_args:
 phase: test
 device: 0
 test_batch_size: 128
-weights: /root/UAV/mixformerk2/mixformer_joint/runs-60-15921.pt
+weights: /root/UAV/mixformerk290/mixformer_joint/runs-69-18270.pt
 
 # save_score: True

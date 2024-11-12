@@ -25,4 +25,4 @@ model_args:
 phase: test
 device: 0
 test_batch_size: 128
-weights: /root/UAV/mixformerk2/mixformer_jm/runs-58-15399.pt
+weights: /root/UAV/mixformerk290/mixformer_jm/runs-61-16182.pt 

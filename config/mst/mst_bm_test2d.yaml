@@ -24,4 +24,4 @@ model_args:
 phase: test
 device: 0
 test_batch_size: 128
-weights: /root/UAV/mst/mst_bm2d/runs-62-16443.pt
+weights: /root/UAV/mst/mst_bm2d/runs-58-15399.pt

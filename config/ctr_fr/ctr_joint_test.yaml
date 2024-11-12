@@ -1,0 +1,26 @@
+pred_name: pred_ctr_fr_joint
+
+# feeder
+dataset: datasets.dataset.UavDataset
+test_data_args:
+  data_path: ./data_test/test_joint.npy
+  debug: False
+  window_size: 64
+  p_interval: [ 0.95 ]
+  is_test: True
+
+# model
+model: model.fr_ctrgcn.Model
+model_args:
+  num_class: 155
+  num_point: 17
+  num_person: 2
+  graph: graph.uav.Graph
+  graph_args:
+    labeling_mode: 'spatial'
+
+# test
+phase: test
+device: 0
+test_batch_size: 128
+weights: /root/UAV/ctr2d_fr/ctr_joint2d/runs-59-15660.pt

@@ -24,4 +24,4 @@ model_args:
 phase: test
 device: 0
 test_batch_size: 128
-weights: /root/UAV/mst/mst_bone2d/runs-59-15660.pt
+weights: /root/UAV/mst/mst_bone2d/runs-61-16182.pt

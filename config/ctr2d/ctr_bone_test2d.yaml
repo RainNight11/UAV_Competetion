@@ -24,4 +24,4 @@ model_args:
 phase: test
 device: 0
 test_batch_size: 128
-weights: ./ctrgcn_joint2d/runs-64-16640.pt
+weights: /root/UAV/ctr2d/ctr_bone2d/runs-56-14877.pt
