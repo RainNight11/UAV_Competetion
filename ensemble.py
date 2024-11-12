@@ -114,17 +114,12 @@ if __name__ == "__main__":
     acc = right_num / total_num
     acc5 = right_num_5 / total_num
 
-    print('Top1 Acc: {:.4f}%'.format(acc * 100))
-    print('Top5 Acc: {:.4f}%'.format(acc5 * 100))
 
     # 保存最终的集成结果为 npy 文件，文件名包含 Top1 准确率
     final_ensemble_result = np.array(final_ensemble_result)
-    np.save(f"ens_{acc:.4f}.npy", final_ensemble_result)
-    print(f"Ensemble results saved to ens_{acc:.4f}.npy")
+    np.save(f"ens.npy", final_ensemble_result)
 
     # 在日志文件中记录最终的准确率和权重
     with open(log_filename, 'a') as log_file:
-        log_file.write(f"\nFinal Top1 Accuracy: {acc * 100:.4f}%\n")
-        log_file.write(f"Final Top5 Accuracy: {acc5 * 100:.4f}%\n")
         log_file.write("Final Optimized Weights: " + ", ".join(f"{w:.4f}" for w in optimized_weights) + "\n")
     print(f"Log file saved to {log_filename}")
