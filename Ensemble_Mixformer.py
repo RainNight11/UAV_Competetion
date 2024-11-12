@@ -63,7 +63,7 @@ def get_parser():
     parser.add_argument('--mixformerk2_jm', type=str, default='./npy_former/pred_mixformerk2_jm.npy')
     parser.add_argument('--mixformerk2_bm', type=str, default='./npy_former/pred_mixformerk2_bm.npy')
 
-    parser.add_argument('--val_sample', type=str, default='./data_test/test_label.npy')
+    parser.add_argument('--val_sample', type=str, default='./data/val_label.npy')
     return parser
 
 if __name__ == "__main__":

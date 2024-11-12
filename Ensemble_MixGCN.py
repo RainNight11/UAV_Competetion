@@ -82,7 +82,7 @@ def get_parser():
     # parser.add_argument('--te_jm', type=str, default='./npy/pred_te_jm.npy')
     # parser.add_argument('--te_bm', type=str, default='./npy/pred_te_bm.npy')
 
-    parser.add_argument('--val_sample', type=str, default='./data_test/test_label.npy')
+    parser.add_argument('--val_sample', type=str, default='./data/val_label.npy')
     return parser
 
 if __name__ == "__main__":
