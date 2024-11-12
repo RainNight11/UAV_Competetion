@@ -20,6 +20,7 @@ https://github.com/RainNight11/UAV_Competetion
 
 运行main函数即可，修改config参数，分别对应config与config_mixformer文件夹内的不同train、test的yaml文件，最后得到不同的pred文件（文件列于下面，可使用网盘给定的权重进行检查）
 **注意：对于ctr_loss，需要运行main_loss.py，因为对model与main函数有修改**
+对于strn模型由于论文仍在投暂时无法开源，除该模型外其余均可对照日志与对应权重**完全复现**！
 
 ## 最优权重搜索
 
@@ -32,5 +33,5 @@ https://github.com/RainNight11/UAV_Competetion
 
 ## 权重
 
-[https://drive.google.com/drive/folders/1TMTTBBcxCugXOq7Hfld2nrRs-RcIdbYn?usp=drive_link](https://drive.google.com/file/d/17ji6ohcf5NiLBIuqD8HiyRsp6JmRyQJX/view?usp=drive_link)
+https://drive.google.com/file/d/1GruB3k0Gppt73Mz4PiRPH3b2OvWWhWXA/view?usp=sharing
 
