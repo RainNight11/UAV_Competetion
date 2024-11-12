@@ -13,6 +13,7 @@ def import_class(name):
         mod = getattr(mod, comp)
     return mod
 
+
 def conv_branch_init(conv, branches):
     weight = conv.weight
     n = weight.size(0)
@@ -21,15 +22,18 @@ def conv_branch_init(conv, branches):
     nn.init.normal_(weight, 0, math.sqrt(2. / (n * k1 * k2 * branches)))
     nn.init.constant_(conv.bias, 0)
 
+
 def conv_init(conv):
     if conv.weight is not None:
         nn.init.kaiming_normal_(conv.weight, mode='fan_out')
     if conv.bias is not None:
         nn.init.constant_(conv.bias, 0)
 
+
 def bn_init(bn, scale):
     nn.init.constant_(bn.weight, scale)
     nn.init.constant_(bn.bias, 0)
+
 
 def weights_init(m):
     classname = m.__class__.__name__
@@ -44,8 +48,9 @@ def weights_init(m):
         if hasattr(m, 'bias') and m.bias is not None:
             m.bias.data.fill_(0)
 
+
 class TemporalConv(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size, stride=1, dilation=1):
+    def __init__(self, in_channels, out_channels, kernel_size=5, stride=1, dilation=1):
         super(TemporalConv, self).__init__()
         pad = (kernel_size + (kernel_size-1) * (dilation-1) - 1) // 2
         self.conv = nn.Conv2d(
@@ -62,6 +67,7 @@ class TemporalConv(nn.Module):
         x = self.conv(x)
         x = self.bn(x)
         return x
+
 
 class MultiScale_TemporalConv(nn.Module):
     def __init__(self,
@@ -140,6 +146,7 @@ class MultiScale_TemporalConv(nn.Module):
         out += res
         return out
 
+
 class CTRGC(nn.Module):
     def __init__(self, in_channels, out_channels, rel_reduction=8, mid_reduction=1):
         super(CTRGC, self).__init__()
@@ -163,11 +170,12 @@ class CTRGC(nn.Module):
                 bn_init(m, 1)
 
     def forward(self, x, A=None, alpha=1):
-        x1, x2, x3 = self.conv1(x).mean(-2), self.conv2(x).mean(-2), self.conv3(x)
-        x1 = self.tanh(x1.unsqueeze(-1) - x2.unsqueeze(-2))
-        x1 = self.conv4(x1) * alpha + (A.unsqueeze(0).unsqueeze(0) if A is not None else 0)  # N,C,V,V
-        x1 = torch.einsum('ncuv,nctv->nctu', x1, x3)
-        return x1
+        x1, x2, x3 = self.conv1(x), self.conv2(x), self.conv3(x)
+        graph = self.tanh(x1.mean(-2).unsqueeze(-1) - x2.mean(-2).unsqueeze(-2))
+        graph = self.conv4(graph)
+        graph_c = graph * alpha + (A.unsqueeze(0).unsqueeze(0) if A is not None else 0)  # N,C,V,V
+        y = torch.einsum('ncuv,nctv->nctu', graph_c, x3)
+        return y, graph
 
 class unit_tcn(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size=9, stride=1):
@@ -227,22 +235,27 @@ class unit_gcn(nn.Module):
 
     def forward(self, x):
         y = None
+        graph_list = []
         if self.adaptive:
             A = self.PA
         else:
             A = self.A.cuda(x.get_device())
         for i in range(self.num_subset):
-            z = self.convs[i](x, A[i], self.alpha)
+            z, graph = self.convs[i](x, A[i], self.alpha)
+            graph_list.append(graph)
             y = z + y if y is not None else z
         y = self.bn(y)
         y += self.down(x)
         y = self.relu(y)
-        return y
+
+        return y, torch.stack(graph_list, 1)
+
 
 class TCN_GCN_unit(nn.Module):
     def __init__(self, in_channels, out_channels, A, stride=1, residual=True, adaptive=True, kernel_size=5, dilations=[1,2]):
         super(TCN_GCN_unit, self).__init__()
         self.gcn1 = unit_gcn(in_channels, out_channels, A, adaptive=adaptive)
+        # self.tcn1 = TemporalConv(out_channels, out_channels, stride=stride)
         self.tcn1 = MultiScale_TemporalConv(out_channels, out_channels, kernel_size=kernel_size, stride=stride, dilations=dilations,
                                             residual=False)
         self.relu = nn.ReLU(inplace=True)
@@ -256,8 +269,10 @@ class TCN_GCN_unit(nn.Module):
             self.residual = unit_tcn(in_channels, out_channels, kernel_size=1, stride=stride)
 
     def forward(self, x):
-        y = self.relu(self.tcn1(self.gcn1(x)) + self.residual(x))
-        return y
+        z, graph = self.gcn1(x)
+        y = self.relu(self.tcn1(z) + self.residual(x))
+        return y, graph
+
 
 class Model(nn.Module):
     def __init__(self, num_class=60, num_point=25, num_person=2, graph=None, graph_args=dict(), in_channels=2,
@@ -270,7 +285,7 @@ class Model(nn.Module):
             Graph = import_class(graph)
             self.graph = Graph(**graph_args)
 
-        A = self.graph.A # 3,17,17
+        A = self.graph.A # 3,25,25
 
         self.num_class = num_class
         self.num_point = num_point
@@ -295,28 +310,55 @@ class Model(nn.Module):
             self.drop_out = nn.Dropout(drop_out)
         else:
             self.drop_out = lambda x: x
+    
+    def partDivison(self, graph):
+        _, k, u, v = graph.size() # n k u v
+        head = [0,1,2,3,4]
+        left_arm = [5,7,9]
+        right_arm = [6,8,10]
+        # torso = [5,6,11,12]
+        left_leg = [11,13,15]
+        right_leg = [15,14,16]
+        graph_list = []
+        part_list = [head, right_arm, left_arm, right_leg, left_leg]
+        for part in part_list:
+            part_grah = graph[:,:,part,:].mean(dim=2, keepdim=True)
+            graph_list.append(part_grah)
+        graph = torch.cat(graph_list, 2)
+        graph_list = []
+        for part in part_list:
+            part_grah = graph[:,:,:,part].mean(dim=-1, keepdim=True)
+            graph_list.append(part_grah)
+        return torch.cat(graph_list, -1)
 
     def forward(self, x):
+        if len(x.shape) == 3:
+            N, T, VC = x.shape
+            x = x.view(N, T, self.num_point, -1).permute(0, 3, 1, 2).contiguous().unsqueeze(-1)
         N, C, T, V, M = x.size()
 
         x = x.permute(0, 4, 3, 1, 2).contiguous().view(N, M * V * C, T)
         x = self.data_bn(x)
         x = x.view(N, M, V, C, T).permute(0, 1, 3, 4, 2).contiguous().view(N * M, C, T, V)
-        x = self.l1(x)
-        x = self.l2(x)
-        x = self.l3(x)
-        x = self.l4(x)
-        x = self.l5(x)
-        x = self.l6(x)
-        x = self.l7(x)
-        x = self.l8(x)
-        x = self.l9(x)
-        x = self.l10(x)
+        x, _ = self.l1(x)
+        x, _ = self.l2(x)
+        x, _ = self.l3(x)
+        x, _ = self.l4(x)
+        x, _ = self.l5(x)
+        x, _ = self.l6(x)
+        x, _ = self.l7(x)
+        x, _ = self.l8(x)
+        x, _ = self.l9(x)
+        x, graph = self.l10(x)
 
         # N*M,C,T,V
         c_new = x.size(1)
         x = x.view(N, M, c_new, -1)
         x = x.mean(3).mean(1)
         x = self.drop_out(x)
-
-        return self.fc(x)
+        graph2 = graph.view(N, M, -1, c_new, V, V)
+        # graph4 = torch.einsum('n m k c u v, n m k c v l -> n m k c u l', graph2, graph2)
+        graph2 = graph2.view(N, M, -1, c_new, V, V).mean(1).mean(2).view(N, -1)
+        # graph4 = graph4.view(N, M, -1, c_new, V, V).mean(1).mean(2).view(N, -1)
+        # graph = torch.cat([graph2, graph4], -1)
+        return self.fc(x), graph2
