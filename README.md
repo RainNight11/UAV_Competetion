@@ -32,5 +32,5 @@ https://github.com/RainNight11/UAV_Competetion
 
 ## 权重
 
-[https://drive.google.com/drive/folders/1TMTTBBcxCugXOq7Hfld2nrRs-RcIdbYn?usp=drive_link](https://drive.google.com/file/d/17ji6ohcf5NiLBIuqD8HiyRsp6JmRyQJX/view?usp=drive_link)
+https://drive.google.com/file/d/1GruB3k0Gppt73Mz4PiRPH3b2OvWWhWXA/view?usp=sharing
 
